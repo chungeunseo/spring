@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- com.ssafy.ws.model 패키지를 스캔해서 빈을 등록한다. -->
+	<context:component-scan base-package="com.ssafy.ws.model"></context:component-scan>
+
+	<!-- BasicDataSource 타입의 빈을 선언하고 필요한 속성들을 setter로 설정하므로 property 태그가 사용된다. -->
+	<bean id="datasource"
+		class="org.apache.commons.dbcp2.BasicDataSource">
+		<!-- 속성에 할당되는 값은 다른 빈이 아닌 단순 scalar 값이므로 value 속성을 사용한다. -->
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver"></property>
+		<property name="url"
+			value="jdbc:mysql://localhost:3306/ssafy_ws_5th?serverTimezone=UTC"></property>
+		<property name="username" value="ssafy"></property>
+		<property name="password" value="ssafy"></property>
+	</bean>
+</beans>
