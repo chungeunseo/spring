@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- name space는 UserRepo의 fully qualified name으로 설정한다. -->
+<mapper namespace="com.ssafy.hw.model.repo.UserRepo">
+
+	<!-- 사용자 정보를 저장한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<!-- <insert id="insert" parameterType="com.ssafy.hw.dto.User"> -->
+	<!--  insert int 테이블명 [(컬럼명1,컬럼명2)]  values (데이터1,데이터2) 
+	
+	
+	     INSERT INTO users
+		VALUES(#{id}, #{password}, #{name}, #{email}, #{age}, #{img} )
+
+
+	     INSERT INTO users  (id,password,name,email,age)
+		VALUES(#{id}, #{password}, #{name}, #{email}, #{age} )
+	
+	  -->
+	<insert id="insert" parameterType="User">
+		INSERT INTO users
+		VALUES(#{id}, #{password}, #{name}, #{email}, #{age}, #{img} )
+	</insert>
+	
+	<!-- 사용자 정보를 삭제한다. -->
+	<delete id="delete" parameterType="String">
+		DELETE FROM users
+		WHERE id = #{id}
+	</delete>
+	
+	<!-- 사용자 정보를 수정한다. -->
+	<update id="update" parameterType="user"  >
+		UPDATE users
+		SET password = #{password} , name = #{name} , email = #{email}, age = #{age}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 사용자를 id로 검색하여 조회한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<select id="searchById" parameterType="string"
+		resultType="user">
+		SELECT *
+		FROM users WHERE id = #{id}
+	</select>
+
+	<!-- 사용자 이름으로 검색하여 조회한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<select id="searchByName" parameterType="String"
+		resultType="User">
+		SELECT *
+		FROM users WHERE name LIKE
+		CONCAT('%',#{name},'%')
+	</select>
+
+	<!-- 모든 사용자 정보를 검색한다. id는 repo클래스의 메소드 이름과 일치시킨다. -->
+	<select id="selectAll" resultType="User">
+		SELECT * FROM users
+	</select>
+</mapper>
+
+
+
